@@ -1,0 +1,1 @@
+dhud_hunger (Enable hunger based heal system) bool true
