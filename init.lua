@@ -11,18 +11,18 @@ minetest.register_on_joinplayer(function(player)
 	end
 	dhud.huds[name]["hp"] = player:hud_add({
 		hud_elem_type = "text",
-		position = {x = 0.5, y = 0.9},
+		position = {x = 0.5, y = 1},
 		alignment = {x = 1, y = 0},
-		offset = {x = -300, y = 20},
+		offset = {x = -120, y = -80},
 		size = {x = 2, y = 2},
 		number = 0xFF0000,
 		text = string.format("%d %%",player:get_hp()/player:get_properties().hp_max*100)
 	})
 	player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.5, y = 0.9},
+			position = {x = 0.5, y = 1},
 			alignment = {x = 1, y = 0},
-			offset = {x = -340, y = 20},
+			offset = {x = -160, y = -80},
 			scale = {x = 1,y = 1},
 			text = "dhud_hp.png"
 	})
@@ -35,9 +35,9 @@ end)
 local function dmgpop(player, tex)
 	local id = player:hud_add({
 		hud_elem_type = "image",
-		position = {x = 0.5, y = 0.9},
+		position = {x = 0.5, y = 1},
 		alignment = {x = 1, y = 0},
-		offset = {x = -340, y = -15},
+		offset = {x = -160, y = -120},
 		scale = {x = 2,y = 2},
 		text = tex
 	})
