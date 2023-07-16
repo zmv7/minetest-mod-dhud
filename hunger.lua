@@ -119,8 +119,8 @@ minetest.register_on_joinplayer(function(player)
 	dhud.huds[name]["hunger_icon"] = player:hud_add({
 		hud_elem_type = "image",
 		position = {x = 0.5, y = 1},
-		alignment = {x = 1, y = 0},
-		offset = {x = 10, y = -80},
+		alignment = {x = 0, y = 0},
+		offset = {x = 30, y = -80},
 		scale = {x = 1,y = 1},
 		text = "dhud_hunger.png"
 	})

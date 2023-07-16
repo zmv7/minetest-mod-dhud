@@ -21,8 +21,8 @@ minetest.register_on_joinplayer(function(player)
 	dhud.huds[name]["hp_icon"] = player:hud_add({
 			hud_elem_type = "image",
 			position = {x = 0.5, y = 1},
-			alignment = {x = 1, y = 0},
-			offset = {x = -160, y = -80},
+			alignment = {x = 0, y = 0},
+			offset = {x = -140, y = -80},
 			scale = {x = 1,y = 1},
 			text = "dhud_hp.png"
 	})
@@ -54,8 +54,8 @@ minetest.register_playerevent(function(player, event)
 			dhud.huds[name]["breath"] = player:hud_add({
 				hud_elem_type = "text",
 				position = {x = 0.5, y = 1},
-				alignment = {x = 0, y = 0},
-				offset = {x = 265, y = -80},
+				alignment = {x = 1, y = 0},
+				offset = {x = 220, y = -80},
 				size = {x = 2, y = 2},
 				number = 0x00FFFF,
 				text = string.format("%d %%",breath/breath_max*100)
@@ -67,7 +67,7 @@ minetest.register_playerevent(function(player, event)
 			dhud.huds[name]["breath_icon"] = player:hud_add({
 					hud_elem_type = "image",
 					position = {x = 0.5, y = 1},
-					alignment = {x = 1, y = 0},
+					alignment = {x = 0, y = 0},
 					offset = {x = 200, y = -80},
 					scale = {x = 2,y = 2},
 					text = "bubble.png"
@@ -84,8 +84,8 @@ local function dmgpop(player, tex)
 	local id = player:hud_add({
 		hud_elem_type = "image",
 		position = {x = 0.5, y = 1},
-		alignment = {x = 1, y = 0},
-		offset = {x = -160, y = -120},
+		alignment = {x = 0, y = 0},
+		offset = {x = -140, y = -120},
 		scale = {x = 2,y = 2},
 		text = tex
 	})
