@@ -109,18 +109,18 @@ minetest.register_on_joinplayer(function(player)
 	end
 	dhud.huds[name]["hunger"] = player:hud_add({
 		hud_elem_type = "text",
-		position = {x = 0.5, y = 0.9},
+		position = {x = 0.5, y = 1},
 		alignment = {x = 1, y = 0},
-		offset = {x = -100, y = 20},
+		offset = {x = 50, y = -80},
 		size = {x = 2, y = 2},
 		number = 0xDDD000,
 		text = string.format("%.1f %%",dhud.get_hunger(player)/20*100)
 	})
 	player:hud_add({
 			hud_elem_type = "image",
-			position = {x = 0.5, y = 0.9},
+			position = {x = 0.5, y = 1},
 			alignment = {x = 1, y = 0},
-			offset = {x = -140, y = 20},
+			offset = {x = 10, y = -80},
 			scale = {x = 1,y = 1},
 			text = "dhud_hunger.png"
 	})
