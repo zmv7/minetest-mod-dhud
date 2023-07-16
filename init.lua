@@ -77,7 +77,10 @@ minetest.register_playerevent(function(player, event)
 end)
 
 minetest.register_on_leaveplayer(function(player)
-	dhud.huds[name] = nil
+	local name = player and player:get_player_name()
+	if name then
+		dhud.huds[name] = nil
+	end
 end)
 
 local function dmgpop(player, tex)
