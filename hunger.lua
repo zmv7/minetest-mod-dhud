@@ -77,25 +77,31 @@ minetest.register_globalstep(function(dtime)
 	if timer1 >= 3 then
 		timer1 = 0
 		for _,player in ipairs(minetest.get_connected_players()) do
-			local hunger = dhud.get_hunger(player)
-			if hunger > 5 then
-				local hp = player:get_hp()
-				if hp < player:get_properties().hp_max and hp > 0 then
-					player:set_hp(hp+1)
-					dhud.set_hunger(player,hunger-0.5)
+			local nohunger = minetest.check_player_privs(player,{nohunger=true})
+			if not nohunger then
+				local hunger = dhud.get_hunger(player)
+				if hunger > 5 then
+					local hp = player:get_hp()
+					if hp < player:get_properties().hp_max and hp > 0 then
+						player:set_hp(hp+1)
+						dhud.set_hunger(player,hunger-0.5)
+					end
+				elseif hunger <= 0 then
+					local hp = player:get_hp()
+					player:set_hp(hp-1)
 				end
-			elseif hunger <= 0 then
-				local hp = player:get_hp()
-				player:set_hp(hp-1)
 			end
 		end
 	end
 	if timer2 >= 60 then
 		timer2 = 0
 		for _,player in ipairs(minetest.get_connected_players()) do
-			local hunger = dhud.get_hunger(player)
-			if hunger > 0 then
-				dhud.set_hunger(player,hunger-0.1)
+			local nohunger = minetest.check_player_privs(player,{nohunger=true})
+			if not nohunger then
+				local hunger = dhud.get_hunger(player)
+				if hunger > 0 then
+					dhud.set_hunger(player,hunger-0.1)
+				end
 			end
 		end
 	end
@@ -106,6 +112,14 @@ minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name()
 	if not dhud.huds[name] then
 		dhud.huds[name] = {}
+	end
+	local meta = player:get_meta()
+	if not meta:get("hunger") then
+		meta:set_float("hunger",16)
+	end
+	local nohunger = minetest.check_player_privs(player,{nohunger=true})
+	if nohunger then
+		return
 	end
 	dhud.huds[name]["hunger"] = player:hud_add({
 		hud_elem_type = "text",
@@ -128,3 +142,8 @@ end)
 minetest.register_on_respawnplayer(function(player, reason)
 	dhud.set_hunger(player,16)
 end)
+minetest.register_privilege("nohunger",{
+	description = "Disable hunger for player",
+	give_to_singleplayer = false,
+	give_to_admin = false
+})
